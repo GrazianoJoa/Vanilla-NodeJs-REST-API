@@ -1,14 +1,22 @@
 const http = require('http')
-const { getProducts, getProduct } = require('./controllers/bookControllers')
+const { getBooks, getBook, createBook, updateBook, deleteBook } = require('./controllers/bookControllers')
 
 const server = http.createServer((req, res) => {
+	// Routes
 	if(req.url === '/api/books' && req.method === 'GET') {
-		getProducts(req, res)
+		getBooks(req, res)
 	} else if (req.url.match(/\/api\/books\/([0-9]+)/) && req.method === 'GET') {
 		const id = req.url.split('/')[3] 			
-		getProduct(req, res)
-	} 
-	else {
+		getBook(req, res, id)
+	} else if (req.url === '/api/books' && req.method === 'POST') {
+		createBook(req, res)
+	} else if (req.url.match(/\/api\/books\/([0-9]+)/) && req.method === 'PUT') {
+		const id = req.url.split('/')[3] 			
+		updateBook(req, res, id)
+	} else if (req.url.match(/\/api\/books\/([0-9]+)/) && req.method === 'DELETE'){
+		const id = req.url.split('/')[3] 	
+		deleteBook(req, res, id)
+	}else {
 		res.writeHead(404, { 'Content-Type': 'application/json'})
 		res.end(JSON.stringify({ 'message': "Route not found :'( "}))
 	}

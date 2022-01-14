@@ -20,5 +20,8 @@
   "homepage": "https://github.com/GrazianoJoa/Vanilla-NodeJs-REST-API#readme",
   "devDependencies": {
     "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "uuid": "^8.3.2"
   }
 }
